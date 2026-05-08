@@ -1,0 +1,42 @@
+{
+  "blocked_external_extensions": [
+    ".env",
+    ".key",
+    ".pem",
+    ".p12",
+    ".pfx",
+    ".sqlite",
+    ".db",
+    ".kdbx"
+  ],
+  "decision_thresholds": {
+    "allow": 0,
+    "block": 70,
+    "warn": 25
+  },
+  "description": "Recipient-aware DLP policy for local secure file transfer demos with risk scoring and evidence-ready decisions.",
+  "external_block_severities": [
+    "high",
+    "critical"
+  ],
+  "high_risk_document_block_severity": "medium",
+  "high_risk_extensions": [
+    ".csv",
+    ".xlsx",
+    ".xls",
+    ".docx",
+    ".pdf"
+  ],
+  "policy_name": "Local DLP Baseline Policy",
+  "risk_weights": {
+    "blocked_file_type": 45,
+    "clean": 0,
+    "critical": 70,
+    "external_recipient": 10,
+    "high": 45,
+    "high_risk_extension": 10,
+    "low": 10,
+    "medium": 25
+  },
+  "version": "2.0"
+}
