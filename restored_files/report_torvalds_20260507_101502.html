@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OSINT Forensic Report - torvalds</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            color: #222;
+            background: #fff;
+        }
+        h1 {
+            background: #1a1a2e;
+            color: white;
+            padding: 20px;
+            border-radius: 6px;
+        }
+        h2 {
+            color: #1a1a2e;
+            border-bottom: 2px solid #1a1a2e;
+            padding-bottom: 6px;
+            margin-top: 40px;
+        }
+        h3 {
+            color: #16213e;
+            margin-top: 20px;
+        }
+        .meta {
+            background: #f0f4f8;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 30px;
+        }
+        .meta p { margin: 4px 0; }
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            margin: 2px;
+        }
+        .found    { background: #d4edda; color: #155724; }
+        .notfound { background: #f8d7da; color: #721c24; }
+        .warning  { background: #fff3cd; color: #856404; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 13px;
+        }
+        th {
+            background: #1a1a2e;
+            color: white;
+            padding: 10px;
+            text-align: left;
+        }
+        td {
+            padding: 8px 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        tr:nth-child(even) { background: #f9f9f9; }
+        a { color: #0066cc; word-break: break-all; }
+        .section-box {
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+        .footer {
+            margin-top: 60px;
+            text-align: center;
+            font-size: 12px;
+            color: #888;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .profile-card {
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 15px;
+        }
+        .profile-card p { margin: 5px 0; font-size: 13px; }
+        .highlight { color: #e74c3c; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <h1>OSINT Forensic Investigation Report</h1>
+    <div class="meta">
+        <p><strong>Target Username:</strong> torvalds</p>
+        <p><strong>Generated At:</strong> 2026-05-07 07:15:02 UTC</p>
+        <p><strong>Investigator:</strong> Automated OSINT Framework</p>
+        <p><strong>Report ID:</strong> B0E05B14</p>
+    </div>
+
+    <!-- SECTION 1: PLATFORM PRESENCE -->
+    <h2>1. Platform Presence</h2>
+    <table>
+        <tr>
+            <th>Platform</th>
+            <th>Profile URL</th>
+            <th>Status</th>
+        </tr>
+        
+        <tr>
+            <td>Twitter</td>
+            <td><a href="https://twitter.com/torvalds">https://twitter.com/torvalds</a></td>
+            <td>
+                
+                    <span class="badge found">FOUND</span>
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>GitHub</td>
+            <td><a href="https://github.com/torvalds">https://github.com/torvalds</a></td>
+            <td>
+                
+                    <span class="badge found">FOUND</span>
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>Reddit</td>
+            <td><a href="https://reddit.com/user/torvalds">https://reddit.com/user/torvalds</a></td>
+            <td>
+                
+                    <span class="badge notfound">NOT FOUND</span>
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td>Instagram</td>
+            <td><a href="https://instagram.com/torvalds">https://instagram.com/torvalds</a></td>
+            <td>
+                
+                    <span class="badge found">FOUND</span>
+                
+            </td>
+        </tr>
+        
+    </table>
+
+    <!-- SECTION 2: PROFILE DATA -->
+    <h2>2. Extracted Profile Data</h2>
+    <div class="profile-grid">
+        
+        <div class="profile-card">
+            <h3>GITHUB</h3>
+            
+                
+            
+                
+                <p><strong>Username:</strong> torvalds</p>
+                
+            
+                
+                <p><strong>Display Name:</strong> Linus Torvalds</p>
+                
+            
+                
+            
+                
+                <p><strong>Location:</strong> Portland, OR</p>
+                
+            
+                
+            
+                
+                <p><strong>Company:</strong> Linux Foundation</p>
+                
+            
+                
+            
+                
+                <p><strong>Followers:</strong> 301264</p>
+                
+            
+                
+            
+                
+                <p><strong>Public Repos:</strong> 11</p>
+                
+            
+                
+                <p><strong>Created At:</strong> 2011-09-03T15:26:22Z</p>
+                
+            
+                
+                <p><strong>Updated At:</strong> 2026-01-13T07:10:05Z</p>
+                
+            
+                
+                <p><strong>Profile Url:</strong> https://github.com/torvalds</p>
+                
+            
+                
+            
+                
+            
+        </div>
+        
+        <div class="profile-card">
+            <h3>REDDIT</h3>
+            
+                
+            
+                
+                <p><strong>Username:</strong> torvalds</p>
+                
+            
+                
+            
+                
+                <p><strong>Post Karma:</strong> 2481</p>
+                
+            
+                
+                <p><strong>Comment Karma:</strong> 557</p>
+                
+            
+                
+                <p><strong>Total Karma:</strong> 3038</p>
+                
+            
+                
+                <p><strong>Is Verified:</strong> True</p>
+                
+            
+                
+            
+                
+                <p><strong>Account Age:</strong> 2011-10-27T13:39:58</p>
+                
+            
+                
+                <p><strong>Profile Url:</strong> https://reddit.com/user/torvalds</p>
+                
+            
+                
+            
+                
+            
+        </div>
+        
+        
+    </div>
+
+    <!-- SECTION 3: NETWORK GRAPH -->
+    <h2>3. Network Graph Analysis</h2>
+    <div class="section-box">
+        
+        <p><strong>Total Nodes:</strong> 14</p>
+        <p><strong>Total Edges:</strong> 13</p>
+        <p><strong>Generated At:</strong> 2026-05-07T07:12:14.042860</p>
+        <h3>Connections</h3>
+        <table>
+            <tr>
+                <th>From</th>
+                <th>To</th>
+                <th>Relation</th>
+            </tr>
+            
+            <tr>
+                <td>sprsquish</td>
+                <td>torvalds</td>
+                <td>follows</td>
+            </tr>
+            
+            <tr>
+                <td>torvalds</td>
+                <td>r/LinkedInLunatics</td>
+                <td>active_in</td>
+            </tr>
+            
+            <tr>
+                <td>torvalds</td>
+                <td>r/UpvoteBecauseButt</td>
+                <td>active_in</td>
+            </tr>
+            
+            <tr>
+                <td>torvalds</td>
+                <td>r/MonclerRep</td>
+                <td>active_in</td>
+            </tr>
+            
+            <tr>
+                <td>pius</td>
+                <td>torvalds</td>
+                <td>follows</td>
+            </tr>
+            
+            <tr>
+                <td>therubymug</td>
+                <td>torvalds</td>
+                <td>follows</td>
+            </tr>
+            
+            <tr>
+                <td>crafterm</td>
+                <td>torvalds</td>
+                <td>follows</td>
+            </tr>
+            
+            <tr>
+                <td>auser</td>
+                <td>torvalds</td>
+                <td>follows</td>
+            </tr>
+            
+            <tr>
+                <td>jarib</td>
+                <td>torvalds</td>
+                <td>follows</td>
+            </tr>
+            
+            <tr>
+                <td>komapa</td>
+                <td>torvalds</td>
+                <td>follows</td>
+            </tr>
+            
+            <tr>
+                <td>gjnoonan</td>
+                <td>torvalds</td>
+                <td>follows</td>
+            </tr>
+            
+            <tr>
+                <td>malkomalko</td>
+                <td>torvalds</td>
+                <td>follows</td>
+            </tr>
+            
+            <tr>
+                <td>peleteiro</td>
+                <td>torvalds</td>
+                <td>follows</td>
+            </tr>
+            
+            
+        </table>
+        
+    </div>
+
+    <!-- SECTION 4: CACHE RECOVERY -->
+    <h2>4. Cache Recovery Findings</h2>
+    
+        
+        <h3>GITHUB</h3>
+        <div class="section-box">
+
+            <!-- Snapshot History -->
+            
+
+            <!-- Deleted Content -->
+            
+            <p>No deleted content detected for github</p>
+            
+
+        </div>
+        
+        <h3>REDDIT</h3>
+        <div class="section-box">
+
+            <!-- Snapshot History -->
+            
+
+            <!-- Deleted Content -->
+            
+            <p>No deleted content detected for reddit</p>
+            
+
+        </div>
+        
+        <h3>TWITTER</h3>
+        <div class="section-box">
+
+            <!-- Snapshot History -->
+            
+
+            <!-- Deleted Content -->
+            
+            <p>No deleted content detected for twitter</p>
+            
+
+        </div>
+        
+        <h3>INSTAGRAM</h3>
+        <div class="section-box">
+
+            <!-- Snapshot History -->
+            
+
+            <!-- Deleted Content -->
+            
+            <p>No deleted content detected for instagram</p>
+            
+
+        </div>
+        
+    
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <p>Generated by Social Media Forensics & OSINT Investigation Framework</p>
+        <p>Report ID: B0E05B14 | 2026-05-07 07:15:02 UTC</p>
+    </div>
+
+</body>
+</html>

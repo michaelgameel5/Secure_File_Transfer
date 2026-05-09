@@ -1,0 +1,1 @@
+Project update: the migration plan is ready for internal review. No sensitive credentials are included here.

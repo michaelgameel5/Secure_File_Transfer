@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Secure Transfer Evidence Report</title>
+  <style>
+    :root {
+      --bg:#030712; --panel:#071326; --panel2:#0c1b33; --line:#244064; --text:#edf5ff;
+      --muted:#a4b8d8; --blue:#38bdf8; --indigo:#2563eb; --purple:#8b5cf6; --green:#22c55e; --red:#ef4444; --amber:#f59e0b;
+    }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:Segoe UI, Inter, Arial, sans-serif; background:radial-gradient(circle at 18% -10%, rgba(56,189,248,.25), transparent 32%), radial-gradient(circle at 95% 8%, rgba(139,92,246,.24), transparent 34%), linear-gradient(135deg,#030712 0%,#071326 50%,#070a18 100%); color:var(--text); }
+    .wrap { max-width:1200px; margin:0 auto; padding:38px 24px 60px; }
+    .hero { position:relative; overflow:hidden; border:1px solid rgba(148,163,184,.24); background:linear-gradient(135deg,rgba(12,27,51,.96),rgba(5,12,28,.88)); border-radius:32px; padding:34px; box-shadow:0 34px 90px rgba(0,0,0,.42); }
+    .hero:after { content:""; position:absolute; inset:-40% -15% auto auto; width:360px; height:360px; background:radial-gradient(circle,rgba(56,189,248,.16),transparent 68%); filter:blur(4px); }
+    .eyebrow { color:#93c5fd; text-transform:uppercase; letter-spacing:.18em; font-weight:900; font-size:12px; }
+    h1 { margin:10px 0 10px; font-size:46px; line-height:1.02; letter-spacing:-.04em; }
+    .subtitle { color:var(--muted); max-width:860px; line-height:1.65; font-size:15px; }
+    .topline { display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; align-items:flex-start; }
+    .badge { display:inline-flex; align-items:center; gap:8px; padding:11px 15px; border-radius:999px; font-weight:950; border:1px solid; box-shadow:0 0 26px rgba(59,130,246,.16); }
+    .badge.approved { background:rgba(34,197,94,.12); color:#bbf7d0; border-color:rgba(34,197,94,.45); }
+    .badge.blocked { background:rgba(239,68,68,.14); color:#fecaca; border-color:rgba(239,68,68,.5); }
+    .grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:22px; }
+    .card { border:1px solid rgba(148,163,184,.22); background:rgba(7,19,38,.82); border-radius:24px; padding:21px; box-shadow:inset 0 1px 0 rgba(255,255,255,.04); }
+    .metric { font-size:34px; font-weight:950; margin-top:8px; letter-spacing:-.03em; }
+    .label { color:var(--muted); font-size:13px; font-weight:750; }
+    .two { display:grid; grid-template-columns:1.08fr .92fr; gap:16px; margin-top:16px; }
+    h2 { margin:0 0 14px; font-size:22px; letter-spacing:-.02em; }
+    h3 { margin:0 0 5px; font-size:15px; }
+    table { width:100%; border-collapse:collapse; overflow:hidden; border-radius:16px; }
+    th,td { border-bottom:1px solid rgba(38,59,98,.75); padding:12px; text-align:left; vertical-align:top; }
+    th { background:#102447; color:#fff; font-size:12px; text-transform:uppercase; letter-spacing:.08em; }
+    code, pre { font-family:Cascadia Mono, Consolas, monospace; }
+    pre { white-space:pre-wrap; background:#030915; border:1px solid rgba(148,163,184,.23); border-radius:18px; padding:16px; color:#dbeafe; max-height:440px; overflow:auto; }
+    .sev { padding:5px 9px; border-radius:999px; font-size:12px; font-weight:950; }
+    .sev.low { background:rgba(59,130,246,.14); color:#bfdbfe; }
+    .sev.medium { background:rgba(245,158,11,.14); color:#fde68a; }
+    .sev.high,.sev.critical { background:rgba(239,68,68,.15); color:#fecaca; }
+    .risk-shell { margin-top:14px; height:13px; border-radius:999px; background:#111c33; border:1px solid rgba(148,163,184,.18); overflow:hidden; }
+    .risk-fill { width:10%; height:100%; background:linear-gradient(90deg,var(--blue),var(--purple),var(--amber),var(--red)); }
+    .timeline { list-style:none; padding:0; margin:0; }
+    .timeline li { position:relative; padding:0 0 18px 30px; color:#dbeafe; }
+    .timeline li:before { content:""; position:absolute; left:4px; top:4px; width:12px; height:12px; border-radius:50%; background:linear-gradient(135deg,var(--blue),var(--purple)); box-shadow:0 0 20px rgba(56,189,248,.55); }
+    .timeline li:after { content:""; position:absolute; left:9px; top:19px; width:2px; height:calc(100% - 18px); background:#263b62; }
+    .timeline li:last-child:after { display:none; }
+    .method-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+    .method-card { display:flex; gap:12px; border:1px solid rgba(148,163,184,.18); background:rgba(12,27,51,.62); border-radius:18px; padding:14px; }
+    .method-index { min-width:36px; height:36px; display:grid; place-items:center; border-radius:12px; background:linear-gradient(135deg,var(--indigo),var(--purple)); font-weight:950; }
+    .method-card p { margin:0; color:var(--muted); line-height:1.45; font-size:13px; }
+    .callout { border:1px solid rgba(56,189,248,.28); background:linear-gradient(135deg,rgba(56,189,248,.12),rgba(139,92,246,.09)); border-radius:22px; padding:18px; color:#dbeafe; }
+    .foot { color:var(--muted); font-size:12px; margin-top:18px; }
+    @media(max-width:960px) { .grid,.two,.method-grid { grid-template-columns:1fr; } h1 { font-size:34px; } }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div class="topline">
+        <div>
+          <div class="eyebrow">Secure File Transfer & DLP Evidence</div>
+          <h1>Transfer Decision Report</h1>
+          <p class="subtitle">Local-first evidence report showing DLP verdict, risk scoring, package details, expiration, and audit-ready technical metadata.</p>
+        </div>
+        <span class="badge approved">APPROVED</span>
+      </div>
+      <div class="grid">
+        <div class="card"><div class="label">Risk Score</div><div class="metric">10/100</div><div class="risk-shell"><div class="risk-fill"></div></div></div>
+        <div class="card"><div class="label">Risk Band</div><div class="metric">Low</div></div>
+        <div class="card"><div class="label">Decision</div><div class="metric">ALLOW</div></div>
+        <div class="card"><div class="label">Confidence</div><div class="metric">MEDIUM</div></div>
+      </div>
+    </section>
+
+    <section class="two">
+      <div class="card">
+        <h2>Transfer Metadata</h2>
+        <table>
+          <tr><th>Field</th><th>Value</th></tr>
+          <tr><td>Generated At UTC</td><td>2026-05-09T09:21:12+00:00</td></tr>
+          <tr><td>File</td><td>D:\Downloads\archive.zip</td></tr>
+          <tr><td>File SHA-256</td><td><code>8b56360abe0acf41c1d1177116c5b48780705a9d5dc04dcc8ed9143b48b9b5a2</code></td></tr>
+          <tr><td>Recipient</td><td>daliabg.1509@gmail.com</td></tr>
+          <tr><td>Recipient Role</td><td>external</td></tr>
+          <tr><td>Package Path</td><td>secure_packages\archive_20260509092112.sftpkg</td></tr>
+          <tr><td>Package SHA-256</td><td><code>4846db79d17e1cc3f8c8ba18f0cf14f62d7483f5e962c9098ad4b53f90f4684c</code></td></tr>
+          <tr><td>Share Link</td><td><code>https://9db9-197-47-141-144.ngrok-free.app/share/eyJleHBpcmVzX2F0X3V0YyI6IjIwMjYtMDUtMTBUMDk6MjE6MTIrMDA6MDAiLCJpZCI6IldsQTVETnI4aVFGQ1lReHp4T04wMnhiOCIsInBhY2thZ2VfaGFzaCI6IjQ4NDZkYjc5ZDE3ZTFjYzNmOGM4YmExOGYwY2YxNGY2MmQ3NDgzZjVlOTYyYzkwOThhZDRiNTNmOTBmNDY4NGMiLCJyZWNpcGllbnQiOiJkYWxpYWJnLjE1MDlAZ21haWwuY29tIiwidiI6MX0</code></td></tr>
+          <tr><td>Expires At UTC</td><td>2026-05-10T09:21:12+00:00</td></tr>
+        </table>
+      </div>
+      <div class="card">
+        <h2>Decision Timeline</h2>
+        <ul class="timeline">
+          <li>File selected and SHA-256 fingerprint calculated.</li>
+          <li>DLP rules scanned content and file type locally.</li>
+          <li>Recipient trust policy and risk score were evaluated.</li>
+          <li>AES-256-GCM package and expiring local share link were created.</li>
+          <li>Audit event was written to the local SQLite hash chain.</li>
+        </ul>
+        <h2>Policy Reasons</h2>
+        <ul><li>No block reason. Transfer allowed by current policy.</li></ul>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:16px">
+      <h2>DLP Findings</h2>
+      <table>
+        <thead><tr><th>Rule</th><th>Label</th><th>Severity</th><th>Count</th><th>Masked Evidence</th></tr></thead>
+        <tbody><tr><td colspan='5'>No DLP findings detected.</td></tr></tbody>
+      </table>
+    </section>
+
+    <section class="card" style="margin-top:16px">
+      <h2>Methodology Trace</h2>
+      <div class="method-grid">
+            <div class="method-card">
+              <div class="method-index">01</div>
+              <div>
+                <h3>1. Intake &amp; Classification</h3>
+                <p>Identify the file, recipient, trust role, expiry window, and business intent before transfer.</p>
+              </div>
+            </div>
+            
+            <div class="method-card">
+              <div class="method-index">02</div>
+              <div>
+                <h3>2. DLP Content Inspection</h3>
+                <p>Detect sensitive content locally without uploading the file to a cloud service.</p>
+              </div>
+            </div>
+            
+            <div class="method-card">
+              <div class="method-index">03</div>
+              <div>
+                <h3>3. Policy Decision</h3>
+                <p>Convert technical findings into a clear allow, warn, or block decision.</p>
+              </div>
+            </div>
+            
+            <div class="method-card">
+              <div class="method-index">04</div>
+              <div>
+                <h3>4. Zero-Knowledge Packaging</h3>
+                <p>Encrypt approved files locally and avoid storing the passphrase.</p>
+              </div>
+            </div>
+            
+            <div class="method-card">
+              <div class="method-index">05</div>
+              <div>
+                <h3>5. Expiring Local Share Record</h3>
+                <p>Create a local share pointer that can be resolved, revoked, and expired without cloud dependency.</p>
+              </div>
+            </div>
+            
+            <div class="method-card">
+              <div class="method-index">06</div>
+              <div>
+                <h3>6. Evidence &amp; Audit Readiness</h3>
+                <p>Preserve a defensible trail for classroom review, internal investigations, or compliance-style demos.</p>
+              </div>
+            </div>
+            </div>
+    </section>
+
+    <section class="callout" style="margin-top:16px">
+      <h2>Recommended Action</h2>
+      <p>Transfer is allowed; keep the package expiration short for external recipients.</p>
+    </section>
+
+    <section class="card" style="margin-top:16px">
+      <h2>Raw Evidence JSON</h2>
+      <pre>{
+  &quot;dlp&quot;: {
+    &quot;blocked&quot;: false,
+    &quot;blocked_reasons&quot;: [],
+    &quot;confidence&quot;: &quot;medium&quot;,
+    &quot;decision&quot;: &quot;allow&quot;,
+    &quot;file_path&quot;: &quot;D:\\Downloads\\archive.zip&quot;,
+    &quot;findings&quot;: [],
+    &quot;recipient_email&quot;: &quot;daliabg.1509@gmail.com&quot;,
+    &quot;recipient_role&quot;: &quot;external&quot;,
+    &quot;recommended_action&quot;: &quot;Transfer is allowed; keep the package expiration short for external recipients.&quot;,
+    &quot;risk_score&quot;: 10,
+    &quot;severity&quot;: &quot;clean&quot;,
+    &quot;summary&quot;: &quot;Clean: no DLP rule matched. Risk score 10/100.&quot;
+  },
+  &quot;expires_at_utc&quot;: &quot;2026-05-10T09:21:12+00:00&quot;,
+  &quot;file_hash&quot;: &quot;8b56360abe0acf41c1d1177116c5b48780705a9d5dc04dcc8ed9143b48b9b5a2&quot;,
+  &quot;file_path&quot;: &quot;D:\\Downloads\\archive.zip&quot;,
+  &quot;package_hash&quot;: &quot;4846db79d17e1cc3f8c8ba18f0cf14f62d7483f5e962c9098ad4b53f90f4684c&quot;,
+  &quot;package_path&quot;: &quot;secure_packages\\archive_20260509092112.sftpkg&quot;,
+  &quot;policy&quot;: {
+    &quot;policy_name&quot;: &quot;Local DLP Baseline Policy&quot;,
+    &quot;policy_version&quot;: &quot;2.0&quot;
+  },
+  &quot;recipient_email&quot;: &quot;daliabg.1509@gmail.com&quot;,
+  &quot;recipient_role&quot;: &quot;external&quot;,
+  &quot;share_link&quot;: &quot;https://9db9-197-47-141-144.ngrok-free.app/share/eyJleHBpcmVzX2F0X3V0YyI6IjIwMjYtMDUtMTBUMDk6MjE6MTIrMDA6MDAiLCJpZCI6IldsQTVETnI4aVFGQ1lReHp4T04wMnhiOCIsInBhY2thZ2VfaGFzaCI6IjQ4NDZkYjc5ZDE3ZTFjYzNmOGM4YmExOGYwY2YxNGY2MmQ3NDgzZjVlOTYyYzkwOThhZDRiNTNmOTBmNDY4NGMiLCJyZWNpcGllbnQiOiJkYWxpYWJnLjE1MDlAZ21haWwuY29tIiwidiI6MX0&quot;,
+  &quot;status&quot;: &quot;success&quot;
+}</pre>
+      <p class="foot">A .sha256 sidecar is generated beside this HTML file for report-integrity verification.</p>
+    </section>
+  </main>
+</body>
+</html>
